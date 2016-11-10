@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">众智考勤查询</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="about">关于</string>
+    <string name="about_msg">众智软件 网络部制作\n\n 在使用的过程中有任何疑问或者建议\n请电联 8024或者在众智微信群中提出</string>
+</resources>
