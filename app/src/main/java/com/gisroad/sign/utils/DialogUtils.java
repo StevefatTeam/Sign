@@ -84,6 +84,7 @@ public class DialogUtils {
         tvName.setText(uName);
         beanList = DepartmentManager.getInstance().select();
         userList = DepartUserManager.getInstance().selectByName(uName);
+        userUrl = (String) SPUtils.get(context,"userUrl","");
         DepartAdapter departAdapter = new DepartAdapter(beanList, context);
         tvDepart.setAdapter(departAdapter);
         tvDepart.setThreshold(0);
