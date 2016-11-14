@@ -111,9 +111,9 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     @Subscribe
-    public void onMessageEvent(MyData myData){
-                String userUrl = (String) SPUtils.get(this, "userUrl", "");
-        switch (myData.getType()){
+    public void onMessageEvent(MyData myData) {
+        String userUrl = (String) SPUtils.get(this, "userUrl", "");
+        switch (myData.getType()) {
             case DataType.LOGIN:
                 if (!userUrl.isEmpty()) {
                     presenter.getUserItem(userUrl);
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             case DataType.LOGOUT:
                 name.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.GONE);
-                noDatas.setVisibility(View.GONE);
+                noDatas.setVisibility(View.VISIBLE);
                 break;
 
         }
@@ -204,14 +204,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
         }
         if (usersList.size() > 0) {
+            name.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
             noDatas.setVisibility(View.GONE);
             name.setText(usersList.get(0).getName());
             recycleAdapter = new RecycleAdapter(this, usersList);
             recyclerView.setAdapter(recycleAdapter);
-            recyclerView.scrollTo(0, 0);
-
-
+            recyclerView.scrollTo(0, 0);  //默认滚动到顶部
         } else {
             recyclerView.setVisibility(View.GONE);
             noDatas.setVisibility(View.VISIBLE);
@@ -228,6 +227,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     public void setAdapter(Object o1, Object o2) {
         adapter = new ExpanListAdapter(MainActivity.this, (List<DepartBean>) o1, (List<List<DepartUser>>) o2);
         expandableListView.setAdapter(adapter);
+        //显示无打卡记录，提示用户
+        recyclerView.setVisibility(View.GONE);
+        noDatas.setVisibility(View.VISIBLE);
+
     }
 
     public void setListen() {

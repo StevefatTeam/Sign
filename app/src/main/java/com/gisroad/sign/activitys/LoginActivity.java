@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = new LoginPresenter(this);
-        dialogUtils = new DialogUtils(this,"数据更新中。。。");
+        dialogUtils = new DialogUtils(this, "数据更新中。。。");
         showProgress();
 
         WebView webView = new WebView(this);
@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         webView.getSettings().setBuiltInZoomControls(true);
         webView.loadUrl("http://221.13.129.100:9090/kqcx/Default.aspx");
 
-        ImageView iv   =new ImageView(this);
+        ImageView iv = new ImageView(this);
         iv.setImageResource(R.mipmap.background);
         setContentView(iv);
 

@@ -20,7 +20,7 @@ import java.util.List;
  * Created by zhanglin on 2016/11/8.
  */
 
-public class UserAdapter extends BaseAdapter implements Filterable{
+public class UserAdapter extends BaseAdapter implements Filterable {
     private ArrayFilter mFilter;
 
     public List<DepartUser> getmList() {
@@ -45,14 +45,14 @@ public class UserAdapter extends BaseAdapter implements Filterable{
 
     private AdapterOnClick adapterOnClick;
 
-    public UserAdapter( Context context) {
+    public UserAdapter(Context context) {
         this.context = context;
     }
 
     @Override
     public int getCount() {
 
-        return mList==null ? 0:mList.size();
+        return mList == null ? 0 : mList.size();
     }
 
     @Override
@@ -71,14 +71,14 @@ public class UserAdapter extends BaseAdapter implements Filterable{
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         DepartAdapter.ViewHolder holder;
-        if(convertView==null){
+        if (convertView == null) {
             view = View.inflate(context, R.layout.item_textview, null);
 
             holder = new DepartAdapter.ViewHolder();
             holder.tv_name = (TextView) view.findViewById(R.id.tv_item_name);
 
             view.setTag(holder);
-        }else{
+        } else {
             view = convertView;
             holder = (DepartAdapter.ViewHolder) view.getTag();
         }
@@ -89,13 +89,13 @@ public class UserAdapter extends BaseAdapter implements Filterable{
         holder.tv_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterOnClick.onClick(v,pc);
+                adapterOnClick.onClick(v, pc);
             }
         });
         return view;
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         public TextView tv_name;
     }
 
@@ -133,7 +133,7 @@ public class UserAdapter extends BaseAdapter implements Filterable{
                     DepartUser pc = unfilteredValues.get(i);
                     if (pc != null) {
 
-                        if(pc.getName()!=null && pc.getName().startsWith(prefixString)){
+                        if (pc.getName() != null && pc.getName().startsWith(prefixString)) {
 
                             newValues.add(pc);
                         }

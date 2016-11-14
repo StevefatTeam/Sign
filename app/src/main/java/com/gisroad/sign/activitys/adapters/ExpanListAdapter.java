@@ -93,7 +93,7 @@ public class ExpanListAdapter extends BaseExpandableListAdapter {
         }
 
         catalog_name.setText(departBeanList.get(groupPosition).getD_name());
-        catalog_name.setTextSize(20);
+        catalog_name.setTextSize(16);
         catalog_name.setPadding(0, 10, 10, 10);
         return convertView;
     }
@@ -105,7 +105,7 @@ public class ExpanListAdapter extends BaseExpandableListAdapter {
         TextView catalog_name = (TextView) convertView.findViewById(R.id.depart_name);
 
         catalog_name.setText(departUserList.get(groupPosition).get(childPosition).getName());
-        catalog_name.setTextSize(18);
+        catalog_name.setTextSize(14);
         return convertView;
     }
 

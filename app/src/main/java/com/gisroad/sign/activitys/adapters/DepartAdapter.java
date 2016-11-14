@@ -39,12 +39,11 @@ public class DepartAdapter extends BaseAdapter implements Filterable {
     @Override
     public int getCount() {
 
-        return mList==null ? 0:mList.size();
+        return mList == null ? 0 : mList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return mList.get(position);
     }
 
@@ -58,14 +57,14 @@ public class DepartAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
         View view;
         ViewHolder holder;
-        if(convertView==null){
+        if (convertView == null) {
             view = View.inflate(context, R.layout.item_textview, null);
 
             holder = new ViewHolder();
             holder.tv_name = (TextView) view.findViewById(R.id.tv_item_name);
 
             view.setTag(holder);
-        }else{
+        } else {
             view = convertView;
             holder = (ViewHolder) view.getTag();
         }
@@ -76,14 +75,14 @@ public class DepartAdapter extends BaseAdapter implements Filterable {
         holder.tv_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    adapterOnClick.onClick(v,pc);
+                adapterOnClick.onClick(v, pc);
             }
         });
 
         return view;
     }
 
-    static class ViewHolder{
+    static class ViewHolder {
         public TextView tv_name;
     }
 
@@ -121,7 +120,7 @@ public class DepartAdapter extends BaseAdapter implements Filterable {
                     DepartBean pc = unfilteredValues.get(i);
                     if (pc != null) {
 
-                        if(pc.getD_name()!=null && pc.getD_name().startsWith(prefixString)){
+                        if (pc.getD_name() != null && pc.getD_name().startsWith(prefixString)) {
 
                             newValues.add(pc);
                         }

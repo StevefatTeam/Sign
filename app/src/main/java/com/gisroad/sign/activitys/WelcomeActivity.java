@@ -22,11 +22,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
         int countsize = DepartmentManager.getInstance().select().size();
 
-        if(countsize>0){
-            Intent intent = new Intent(this,MainActivity.class);
+        if (countsize > 0) {
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        }else{
-            Intent intent = new Intent(this,LoginActivity.class);
+        } else {
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
         //关闭界面

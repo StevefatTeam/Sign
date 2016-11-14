@@ -78,13 +78,13 @@ public class DialogUtils {
         final AutoCompleteTextView tvName = (AutoCompleteTextView) view.findViewById(R.id.tv_name);
         Button cancelBtn = (Button) view.findViewById(R.id.cancel_btn);
         Button okBtn = (Button) view.findViewById(R.id.ok_btn);
-        String dName = (String) SPUtils.get(context,"departName","");
-        final String uName = (String) SPUtils.get(context,"userName","");
+        String dName = (String) SPUtils.get(context, "departName", "");
+        final String uName = (String) SPUtils.get(context, "userName", "");
         tvDepart.setText(dName);
         tvName.setText(uName);
         beanList = DepartmentManager.getInstance().select();
         userList = DepartUserManager.getInstance().selectByName(uName);
-        userUrl = (String) SPUtils.get(context,"userUrl","");
+        userUrl = (String) SPUtils.get(context, "userUrl", "");
         DepartAdapter departAdapter = new DepartAdapter(beanList, context);
         tvDepart.setAdapter(departAdapter);
         tvDepart.setThreshold(0);
@@ -104,7 +104,7 @@ public class DialogUtils {
         userAdapter.setmList(userList);
         tvName.setAdapter(userAdapter);
         tvName.setThreshold(0);
-        userAdapter.setAdapterOnClick(new AdapterOnClick<DepartUser>()  {
+        userAdapter.setAdapterOnClick(new AdapterOnClick<DepartUser>() {
             @Override
             public void onClick(View view, DepartUser user) {
                 userUrl = user.getUrl();
@@ -115,9 +115,9 @@ public class DialogUtils {
         cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SPUtils.put(context,"departName","");
-                SPUtils.put(context,"userName","");
-                SPUtils.put(context,"userUrl","");
+                SPUtils.put(context, "departName", "");
+                SPUtils.put(context, "userName", "");
+                SPUtils.put(context, "userUrl", "");
 
                 MyData myData = new MyData();
                 myData.type = DataType.LOGOUT;
@@ -128,9 +128,9 @@ public class DialogUtils {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SPUtils.put(context,"departName",tvDepart.getText().toString().trim());
-                SPUtils.put(context,"userName",tvName.getText().toString().trim());
-                SPUtils.put(context,"userUrl",userUrl);
+                SPUtils.put(context, "departName", tvDepart.getText().toString().trim());
+                SPUtils.put(context, "userName", tvName.getText().toString().trim());
+                SPUtils.put(context, "userUrl", userUrl);
                 MyData myData = new MyData();
                 myData.type = DataType.LOGIN;
                 EventBus.getDefault().post(myData);
