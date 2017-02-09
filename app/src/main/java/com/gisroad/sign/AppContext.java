@@ -6,7 +6,6 @@ import android.util.Log;
 import com.gisroad.sign.db.DaoMaster;
 import com.gisroad.sign.db.DaoSession;
 import com.gisroad.sign.db.HMROpenHelper;
-import com.pgyersdk.crash.PgyCrashManager;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -28,7 +27,6 @@ public class AppContext extends Application {
     public void onCreate() {
         super.onCreate();
         instances = this;
-        PgyCrashManager.register(this);
         setDatabase();
     }
 

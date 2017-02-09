@@ -53,8 +53,6 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.7'
     //网页解析
     compile 'org.jsoup:jsoup:1.9.2'
-    //蒲公英的sdk
-    compile 'com.pgyersdk:sdk:2.4.0'
     //eventbus
     compile'org.greenrobot:eventbus:3.0.0'
 

@@ -1,9 +1,6 @@
 package com.gisroad.sign.activitys;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.GravityCompat;
@@ -11,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -20,7 +16,6 @@ import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
@@ -38,12 +33,7 @@ import com.gisroad.sign.utils.DialogUtils;
 import com.orhanobut.logger.Logger;
 import com.gisroad.sign.mvp.presenter.MainPresenter;
 import com.gisroad.sign.mvp.view.MainView;
-import com.gisroad.sign.utils.DialogUtils;
 import com.gisroad.sign.utils.SPUtils;
-import com.orhanobut.logger.Logger;
-import com.pgyersdk.javabean.AppBean;
-import com.pgyersdk.update.PgyUpdateManager;
-import com.pgyersdk.update.UpdateManagerListener;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -97,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
         //点击事件的注册
         setListen();
 
-        checkUpdate();
 
     }
 
@@ -314,38 +303,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
 
-    private void checkUpdate() {
-        PgyUpdateManager.register(MainActivity.this,
-                new UpdateManagerListener() {
-
-                    @Override
-                    public void onUpdateAvailable(final String result) {
-
-                        // 将新版本信息封装到AppBean中
-                        final AppBean appBean = getAppBeanFromString(result);
-                        new AlertDialog.Builder(MainActivity.this)
-                                .setTitle("更新")
-                                .setMessage("")
-                                .setNegativeButton(
-                                        "确定",
-                                        new DialogInterface.OnClickListener() {
-
-                                            @Override
-                                            public void onClick(
-                                                    DialogInterface dialog,
-                                                    int which) {
-                                                startDownloadTask(
-                                                        MainActivity.this,
-                                                        appBean.getDownloadURL());
-                                            }
-                                        }).show();
-                    }
-
-                    @Override
-                    public void onNoUpdateAvailable() {
-                    }
-                });
-    }
 
     @Override
     protected void onDestroy() {
