@@ -57,7 +57,6 @@ public class UserAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return mList.get(position);
     }
 

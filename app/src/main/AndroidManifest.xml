@@ -37,10 +37,21 @@
             android:name=".activitys.AboutActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
-        <meta-data
-            android:name="PGYER_APPID"
-            android:value="0ed1c6fee5e674c88059b96aeb8527f0">
-        </meta-data>
+        <receiver android:name=".signappwidget.signprovide.SignProvide">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.stevefat.UPDATE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                       android:resource="@xml/sign_appwidget_info" />
+
+        </receiver>
+        <service android:name=".signappwidget.signservice.SignService"/>
+
+        <service
+            android:name=".signappwidget.signservice.ListViewService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
     </application>
 
 </manifest>
