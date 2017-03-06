@@ -228,7 +228,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 onBackPressed();
                 departUser = (DepartUser) adapter.getChild(groupPosition, childPosition);
-                Logger.e(departUser.toString());
+//                Logger.e(departUser.toString());
                 presenter.getUserItem(departUser.getUrl());
                 name.setText(departUser.getName());
 
@@ -252,16 +252,14 @@ public class MainActivity extends AppCompatActivity implements MainView {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.about) {
-            Intent intent = new Intent(this, AboutActivity.class);
-            startActivity(intent);
-            return true;
+        switch (id) {
+            case R.id.about:
+                Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.refresh:
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -301,7 +299,6 @@ public class MainActivity extends AppCompatActivity implements MainView {
             finish();
         }
     }
-
 
 
     @Override

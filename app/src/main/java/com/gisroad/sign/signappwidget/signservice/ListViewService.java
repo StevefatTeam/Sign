@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -20,8 +21,11 @@ import java.util.List;
  */
 
 public class ListViewService extends RemoteViewsService {
+
+
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
+        Logger.e("--------------");
         return new ListRemoteViewsFactory(this, intent);
     }
 
@@ -31,12 +35,14 @@ public class ListViewService extends RemoteViewsService {
         private int mAppWidgetId;
         List<Users> usersList;
 
+
         public ListRemoteViewsFactory(Context context, Intent intent) {
             mContext = context;
             mAppWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
             String userlist = intent.getStringExtra("userlist");
             List<Users> usersList = JSON.parseArray(userlist, Users.class);
+            Logger.e("---"+usersList.get(0).getName()+"---"+usersList.get(0).getMorning_to());
             this.usersList = usersList;
         }
 
@@ -47,7 +53,7 @@ public class ListViewService extends RemoteViewsService {
 
         @Override
         public void onDataSetChanged() {
-
+            Logger.e("onDataSetChanged()------------------");
         }
 
         @Override
@@ -64,7 +70,7 @@ public class ListViewService extends RemoteViewsService {
         public RemoteViews getViewAt(int position) {
             RemoteViews rv = new RemoteViews(mContext.getPackageName(), R.layout.recy_item);
             Users users = usersList.get(position);
-            Logger.e(users.getName()+"---"+ users.getDate_time()+"----"+users.getMorning_to());
+//            Logger.e(users.getName()+"---"+ users.getDate_time()+"----"+users.getMorning_to());
             //时间
             rv.setTextViewText(R.id.data_time, users.getDate_time());
             //上午到

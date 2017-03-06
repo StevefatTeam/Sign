@@ -48,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         webView.loadUrl("http://221.13.129.100:9090/kqcx/Default.aspx");
 
         ImageView iv = new ImageView(this);
+        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
         iv.setImageResource(R.mipmap.background);
         setContentView(iv);
 

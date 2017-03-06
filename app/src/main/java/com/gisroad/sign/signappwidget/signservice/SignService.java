@@ -74,7 +74,7 @@ public class SignService extends Service implements ResultRequest<Object> {
 
     @Override
     public void onSuccess(Object o) {
-        Logger.e("这个是数据返回了。。。"+o.toString());
+//        Logger.e("这个是数据返回了。。。"+o.toString());
         List<Users> usersList = (List<Users>) o;
         Collections.reverse(usersList);
 
@@ -113,7 +113,7 @@ public class SignService extends Service implements ResultRequest<Object> {
             @Override
             public void run() {
                 String userUrl = (String) SPUtils.get(getApplicationContext(), "userUrl", "");
-                Logger.e("这是用户的url---"+userUrl);
+//                Logger.e("这是用户的url---"+userUrl);
 
                 if (!userUrl.isEmpty()) {
                     new MainModel(SignService.this).getUserItem(userUrl);
