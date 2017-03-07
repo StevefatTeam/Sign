@@ -6,6 +6,10 @@ import android.util.Log;
 import com.gisroad.sign.db.DaoMaster;
 import com.gisroad.sign.db.DaoSession;
 import com.gisroad.sign.db.HMROpenHelper;
+import com.orhanobut.logger.Logger;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.PushAgent;
 
 import org.greenrobot.greendao.database.Database;
 
@@ -28,6 +32,24 @@ public class AppContext extends Application {
         super.onCreate();
         instances = this;
         setDatabase();
+        //bugle 的注册监听
+        CrashReport.initCrashReport(getApplicationContext(), "9699f53eaa", false);
+        //推送服务
+        PushAgent mPushAgent = PushAgent.getInstance(this);
+
+        mPushAgent.register(new IUmengRegisterCallback() {
+
+            @Override
+            public void onSuccess(String deviceToken) {
+                //注册成功会返回device token
+                Logger.e("设备的："+deviceToken);
+            }
+
+            @Override
+            public void onFailure(String s, String s1) {
+
+            }
+        });
     }
 
     public static AppContext getInstances() {
@@ -42,6 +64,8 @@ public class AppContext extends Application {
         // 可能你已经注意到了，你并不需要去编写「CREATE TABLE」这样的 SQL 语句，因为 greenDAO 已经帮你做了。
         // 注意：默认的 DaoMaster.DevOpenHelper 会在数据库升级时，删除所有的表，意味着这将导致数据的丢失。
         // 所以，在正式的项目中，你还应该做一层封装，来实现数据库的安全升级。
+
+
         mHelper = new HMROpenHelper(this, "sign-db", null);
         db = mHelper.getWritableDb();
         // 注意：该数据库连接属于 DaoMaster，所以多个 Session 指的是相同的数据库连接。

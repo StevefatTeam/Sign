@@ -16,19 +16,20 @@ import com.orhanobut.logger.Logger;
 import com.gisroad.sign.mvp.presenter.LoginPresenter;
 import com.gisroad.sign.mvp.view.LoginView;
 import com.gisroad.sign.utils.DialogUtils;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Author: ngh
  * date: 2016/9/28
  */
 
-public class LoginActivity extends AppCompatActivity implements LoginView {
+public class LoginActivity extends BaseActivity implements LoginView {
     private LoginPresenter presenter;
     private DialogUtils dialogUtils;
 
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         presenter = new LoginPresenter(this);
         dialogUtils = new DialogUtils(this, "数据更新中。。。");
         showProgress();
@@ -47,11 +48,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         webView.getSettings().setBuiltInZoomControls(true);
         webView.loadUrl("http://221.13.129.100:9090/kqcx/Default.aspx");
 
-        ImageView iv = new ImageView(this);
-        iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        iv.setImageResource(R.mipmap.background);
-        setContentView(iv);
 
+    }
+
+    @Override
+    protected int getLayoutView() {
+        return R.layout.login_activity;
     }
 
     @Override
@@ -102,5 +104,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             presenter.init(html);
 
         }
+    }
+
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

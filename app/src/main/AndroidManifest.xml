@@ -7,8 +7,9 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>  <!-- 获取设备信息 -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/> <!-- 获取MAC地址-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> <!-- 读写sdcard，storage等等 -->
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/> <!-- 允许程序录制音频 -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+
 
     <application
         android:name=".AppContext"
@@ -39,18 +40,26 @@
 
         <receiver android:name=".signappwidget.signprovide.SignProvide">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
                 <action android:name="com.stevefat.UPDATE"/>
             </intent-filter>
-            <meta-data android:name="android.appwidget.provider"
-                       android:resource="@xml/sign_appwidget_info" />
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/sign_appwidget_info"/>
 
         </receiver>
+
         <service android:name=".signappwidget.signservice.SignService"/>
 
         <service
             android:name=".signappwidget.signservice.ListViewService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
+        <meta-data android:value="58be07d4aed1795d63000660" android:name="UMENG_APPKEY"/>
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="04b119b44adf2f0a72ef8065710c50ba"/>
+
 
     </application>
 

@@ -34,9 +34,11 @@ import com.orhanobut.logger.Logger;
 import com.gisroad.sign.mvp.presenter.MainPresenter;
 import com.gisroad.sign.mvp.view.MainView;
 import com.gisroad.sign.utils.SPUtils;
+import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Collections;
 import java.util.List;
@@ -46,7 +48,7 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends BaseActivity implements MainView {
 
 
     @BindView(R.id.toolbar)
@@ -73,33 +75,25 @@ public class MainActivity extends AppCompatActivity implements MainView {
     RecycleAdapter recycleAdapter;
     private DepartUser departUser;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        EventBus.getDefault().register(this);
-        ButterKnife.bind(this);
-        dialogUtils = new DialogUtils(MainActivity.this, "加载数据中。。。");
-        initView();
-        presenter = new MainPresenter(this);
-        presenter.initListAll();
-
-        //点击事件的注册
-        setListen();
-
-
+    protected int getLayoutView() {
+        return R.layout.activity_main;
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
+        MobclickAgent.onResume(this);
         String userUrl = (String) SPUtils.get(this, "userUrl", "");
         if (!userUrl.isEmpty()) {
             presenter.getUserItem(userUrl);
         }
     }
 
-    @Subscribe
+    @Override
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MyData myData) {
         String userUrl = (String) SPUtils.get(this, "userUrl", "");
         switch (myData.getType()) {
@@ -117,7 +111,16 @@ public class MainActivity extends AppCompatActivity implements MainView {
         }
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
+        dialogUtils = new DialogUtils(MainActivity.this, "加载数据中。。。");
+//        initView();
+        presenter = new MainPresenter(this);
+        presenter.initListAll();
+
+        //点击事件的注册
+        setListen();
+
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -157,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
         });
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -301,9 +305,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
+
+
 }
