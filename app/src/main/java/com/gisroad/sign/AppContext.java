@@ -36,6 +36,7 @@ public class AppContext extends Application {
         CrashReport.initCrashReport(getApplicationContext(), "9699f53eaa", false);
         //推送服务
         PushAgent mPushAgent = PushAgent.getInstance(this);
+        mPushAgent.setDebugMode(false);
 
         mPushAgent.register(new IUmengRegisterCallback() {
 
