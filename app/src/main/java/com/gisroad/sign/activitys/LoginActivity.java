@@ -37,7 +37,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         WebView webView = new WebView(this);
 
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.addJavascriptInterface(new InJavaScriptLocalObj(), "local_obj");
+        webView.addJavascriptInterface(new InJavaScriptLocalObj(), "client");
         webView.setWebViewClient(new MyWebViewClient());
         webView.getSettings().setSupportZoom(true);
         webView.getSettings().setDomStorageEnabled(true);
@@ -80,10 +80,6 @@ public class LoginActivity extends BaseActivity implements LoginView {
     }
 
     final class MyWebViewClient extends WebViewClient {
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            view.loadUrl(url);
-            return true;
-        }
 
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             Log.d("WebView", "onPageStarted");
@@ -91,7 +87,7 @@ public class LoginActivity extends BaseActivity implements LoginView {
         }
 
         public void onPageFinished(WebView view, String url) {
-            view.loadUrl("javascript:window.local_obj.showSource('<head>'+"
+            view.loadUrl("javascript:window.client.showSource('<head>'+"
                     + "document.getElementsByTagName('html')[0].innerHTML+'</head>');");
 
         }

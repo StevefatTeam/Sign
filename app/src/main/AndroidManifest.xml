@@ -14,7 +14,7 @@
     <application
         android:name=".AppContext"
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -38,22 +38,6 @@
             android:name=".activitys.AboutActivity"
             android:theme="@style/AppTheme"/>
 
-        <receiver android:name=".signappwidget.signprovide.SignProvide">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-                <action android:name="com.stevefat.UPDATE"/>
-            </intent-filter>
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/sign_appwidget_info"/>
-
-        </receiver>
-
-        <service android:name=".signappwidget.signservice.SignService"/>
-
-        <service
-            android:name=".signappwidget.signservice.ListViewService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
 
         <meta-data android:value="58be07d4aed1795d63000660" android:name="UMENG_APPKEY"/>
         <meta-data
